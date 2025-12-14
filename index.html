@@ -1,0 +1,1482 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智云星空 - 专业软件定制开发公司</title>
+    <meta name="description" content="智云星空是专业的软件定制开发公司，提供APP开发、小程序开发、网站建设、管理系统开发等服务，专注于为企业提供定制化解决方案。">
+    <meta name="keywords" content="软件定制开发,APP开发,小程序开发,网站建设,管理系统开发">
+    <meta name="author" content="智云星空">
+    <meta property="og:title" content="智云星空 - 专业软件定制开发公司">
+    <meta property="og:description" content="智云星空是专业的软件定制开发公司，提供APP开发、小程序开发、网站建设、管理系统开发等服务。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.zhiyunxingkong.com">
+    
+    <!-- 引入字体 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- 引入图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* 全局样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* 全局变量 */
+        :root {
+            --primary-color: #0A192F;
+            --secondary-color: #64FFDA;
+            --white: #FFFFFF;
+            --dark-gray: #1E293B;
+            --light-gray: #F1F5F9;
+            --transition: all 0.3s ease;
+            --border-radius: 10px;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 基础样式 */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--primary-color);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        p {
+            margin-bottom: 1.5rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        a:hover {
+            color: var(--white);
+        }
+        
+        /* 容器样式 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏样式 */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: var(--transition);
+            border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 0.5rem;
+            font-size: 1.8rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: var(--white);
+            font-weight: 500;
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary-color);
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .cta-button {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .cta-button:hover {
+            background-color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(100, 255, 218, 0.3);
+        }
+        
+        /* 移动端菜单按钮 */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* 英雄区域样式 */
+        #hero {
+            /* 使用100vh确保填满视口高度，并添加min-height确保兼容性 */
+            height: 100vh;
+            min-height: 100vh;
+            /* 使用flex布局确保内容居中 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            /* 移除可能的默认边距影响 */
+            margin: 0;
+            padding: 0;
+            /* 确保在移动设备上也能正确显示 */
+            max-height: 100vh;
+        }
+        
+        /* 粒子背景 */
+        #particles-js {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        /* 轮播图样式 */
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .carousel {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            /* 确保幻灯片内容不会溢出 */
+            overflow: hidden;
+        }
+        
+        /* 确保body和html没有默认边距，避免影响100vh的计算 */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow-x: hidden;
+        }
+        
+        /* 修复移动端100vh兼容性问题 */
+        @media (max-width: 768px) {
+            #hero {
+                /* 使用window.innerHeight替代100vh，解决移动端浏览器地址栏影响 */
+                height: calc(var(--vh, 1vh) * 100);
+            }
+        }
+        
+        .carousel-slide.active {
+            opacity: 1;
+        }
+        
+        .carousel-content {
+            text-align: center;
+            z-index: 3;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        
+        .carousel-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--white) 0%, var(--secondary-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .carousel-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+        
+        .secondary-button {
+            background-color: transparent;
+            color: var(--secondary-color);
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            transition: var(--transition);
+            border: 2px solid var(--secondary-color);
+        }
+        
+        .secondary-button:hover {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+        
+        /* 轮播图背景 */
+        .carousel-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        /* 轮播图指示器 */
+        .carousel-indicators {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 4;
+        }
+        
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.3);
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .indicator.active {
+            background-color: var(--secondary-color);
+            width: 30px;
+            border-radius: 6px;
+        }
+        
+        /* 轮播图控制按钮 */
+        .carousel-control {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(10, 25, 47, 0.5);
+            color: var(--white);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .carousel-control:hover {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .carousel-control.prev {
+            left: 2rem;
+        }
+        
+        .carousel-control.next {
+            right: 2rem;
+        }
+        
+        /* 响应式轮播图 */
+        @media (max-width: 768px) {
+            .carousel-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .carousel-control {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .carousel-control.prev {
+                left: 1rem;
+            }
+            
+            .carousel-control.next {
+                right: 1rem;
+            }
+            
+            .carousel-indicators {
+                bottom: 1rem;
+            }
+        }
+        
+        /* 业务卡片 */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        .service-card {
+            background-color: rgba(30, 41, 59, 0.5);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(100, 255, 218, 0.1);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            background-color: rgba(30, 41, 59, 0.8);
+            border-color: var(--secondary-color);
+            box-shadow: 0 10px 30px rgba(100, 255, 218, 0.15);
+        }
+        
+        .service-card i {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .service-card h3 {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* 通用区块样式 */
+        section {
+            padding: 5rem 0;
+            position: relative;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .section-title p {
+            max-width: 600px;
+            margin: 0 auto;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        /* 核心业务区块 */
+        #services {
+            background-color: rgba(30, 41, 59, 0.2);
+        }
+        
+        /* 案例展示区块 */
+        .cases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .case-card {
+            background-color: rgba(30, 41, 59, 0.5);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: var(--transition);
+            border: 1px solid rgba(100, 255, 218, 0.1);
+        }
+        
+        .case-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .case-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--primary-color);
+        }
+        
+        .case-content {
+            padding: 1.5rem;
+        }
+        
+        .case-content h3 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .case-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .tag {
+            background-color: rgba(100, 255, 218, 0.2);
+            color: var(--secondary-color);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        /* 技术优势区块 */
+        #technologies {
+            background-color: rgba(30, 41, 59, 0.2);
+        }
+        
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        .tech-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 1.5rem;
+            background-color: rgba(30, 41, 59, 0.5);
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+        
+        .tech-item:hover {
+            transform: translateY(-5px);
+            background-color: rgba(30, 41, 59, 0.8);
+        }
+        
+        .tech-item i {
+            font-size: 3rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+        
+        /* 客户评价区块 */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .testimonial-card {
+            background-color: rgba(30, 41, 59, 0.5);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            border: 1px solid rgba(100, 255, 218, 0.1);
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .testimonial-card .quote {
+            font-size: 2rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            margin-top: 1.5rem;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-right: 1rem;
+        }
+        
+        /* 关于我们区块 */
+        #about {
+            background-color: rgba(30, 41, 59, 0.2);
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-top: 3rem;
+        }
+        
+        .about-text {
+            font-size: 1.1rem;
+        }
+        
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background-color: rgba(30, 41, 59, 0.5);
+            border-radius: var(--border-radius);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        /* 联系表单区块 */
+        #contact {
+            background-color: rgba(30, 41, 59, 0.3);
+        }
+        
+        .contact-form {
+            max-width: 600px;
+            margin: 3rem auto 0;
+            background-color: rgba(30, 41, 59, 0.5);
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(100, 255, 218, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            border-radius: var(--border-radius);
+            background-color: rgba(30, 41, 59, 0.8);
+            color: var(--white);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(100, 255, 218, 0.1);
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+        
+        /* 页脚样式 */
+        footer {
+            background-color: var(--dark-gray);
+            padding: 3rem 0 1.5rem;
+            border-top: 1px solid rgba(100, 255, 218, 0.1);
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-section ul li a {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .footer-section ul li a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(100, 255, 218, 0.1);
+            border-radius: 50%;
+            color: var(--secondary-color);
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(100, 255, 218, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* 滚动动画 */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: var(--transition);
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* 加载动画 */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+        
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .loader-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(100, 255, 218, 0.3);
+            border-top-color: var(--secondary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 加载动画 -->
+    <div class="loader" id="loader">
+        <div class="loader-spinner"></div>
+    </div>
+    
+    <!-- 导航栏 -->
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <i class="fas fa-cloud"></i>
+                智云星空
+            </div>
+            <ul class="nav-links">
+                <li><a href="#services">核心业务</a></li>
+                <li><a href="#cases">案例展示</a></li>
+                <li><a href="#technologies">技术优势</a></li>
+                <li><a href="#testimonials">客户评价</a></li>
+                <li><a href="#about">关于我们</a></li>
+                <li><a href="#contact">联系我们</a></li>
+            </ul>
+            <button class="cta-button">立即咨询</button>
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+    
+    <!-- 英雄区域 -->
+    <section id="hero">
+        <!-- 粒子背景 -->
+        <div id="particles-js"></div>
+        
+        <!-- 轮播图 -->
+        <div class="carousel-container">
+            <div class="carousel">
+                <div class="carousel-slide active">
+                    <div class="carousel-content">
+                        <h1>引领数字化未来</h1>
+                        <p>专业的软件定制开发服务商，为企业提供全方位的数字化解决方案</p>
+                        <div class="hero-buttons">
+                            <a href="#services" class="cta-button">了解更多</a>
+                            <a href="#cases" class="secondary-button">查看案例</a>
+                        </div>
+                    </div>
+                    <div class="carousel-background" style="background: linear-gradient(135deg, rgba(10, 25, 47, 0.8) 0%, rgba(100, 255, 218, 0.1) 100%);"></div>
+                </div>
+                <div class="carousel-slide">
+                    <div class="carousel-content">
+                        <h1>创新科技驱动</h1>
+                        <p>采用最新技术栈，为您打造高效、稳定、安全的软件产品</p>
+                        <div class="hero-buttons">
+                            <a href="#technologies" class="cta-button">技术优势</a>
+                            <a href="#contact" class="secondary-button">联系我们</a>
+                        </div>
+                    </div>
+                    <div class="carousel-background" style="background: linear-gradient(135deg, rgba(10, 25, 47, 0.8) 0%, rgba(100, 255, 218, 0.2) 100%);"></div>
+                </div>
+                <div class="carousel-slide">
+                    <div class="carousel-content">
+                        <h1>定制化解决方案</h1>
+                        <p>根据企业需求，量身定制专属的数字化解决方案</p>
+                        <div class="hero-buttons">
+                            <a href="#services" class="cta-button">核心业务</a>
+                            <a href="#cases" class="secondary-button">成功案例</a>
+                        </div>
+                    </div>
+                    <div class="carousel-background" style="background: linear-gradient(135deg, rgba(10, 25, 47, 0.8) 0%, rgba(100, 255, 218, 0.15) 100%);"></div>
+                </div>
+                <div class="carousel-slide">
+                    <div class="carousel-content">
+                        <h1>全流程服务保障</h1>
+                        <p>从需求分析到上线运维，提供全流程的专业服务</p>
+                        <div class="hero-buttons">
+                            <a href="#about" class="cta-button">关于我们</a>
+                            <a href="#contact" class="secondary-button">联系我们</a>
+                        </div>
+                    </div>
+                    <div class="carousel-background" style="background: linear-gradient(135deg, rgba(10, 25, 47, 0.8) 0%, rgba(100, 255, 218, 0.1) 100%);"></div>
+                </div>
+            </div>
+            
+            <!-- 轮播图指示器 -->
+            <div class="carousel-indicators">
+                <button class="indicator active" data-slide="0"></button>
+                <button class="indicator" data-slide="1"></button>
+                <button class="indicator" data-slide="2"></button>
+                <button class="indicator" data-slide="3"></button>
+            </div>
+            
+            <!-- 轮播图控制按钮 -->
+            <button class="carousel-control prev" onclick="prevSlide()">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="carousel-control next" onclick="nextSlide()">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </section>
+    
+    <!-- 核心业务 -->
+    <section id="services">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>核心业务</h2>
+                <p>我们提供全方位的软件开发服务，满足企业不同阶段的数字化需求</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <i class="fas fa-code"></i>
+                    <h3>软件定制开发</h3>
+                    <p>根据企业特定需求，定制开发专属软件系统，提高企业运营效率</p>
+                </div>
+                <div class="service-card fade-in">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>APP 开发</h3>
+                    <p>专业的 iOS 和 Android 移动应用开发，打造流畅的用户体验</p>
+                </div>
+                <div class="service-card fade-in">
+                    <i class="fas fa-weixin"></i>
+                    <h3>小程序开发</h3>
+                    <p>微信、支付宝等平台小程序开发，助力企业拓展移动用户</p>
+                </div>
+                <div class="service-card fade-in">
+                    <i class="fas fa-globe"></i>
+                    <h3>网站建设</h3>
+                    <p>响应式网站设计与开发，提升企业品牌形象和在线影响力</p>
+                </div>
+                <div class="service-card fade-in">
+                    <i class="fas fa-database"></i>
+                    <h3>管理系统开发</h3>
+                    <p>CRM、ERP、OA 等企业管理系统开发，优化企业管理流程</p>
+                </div>
+                <div class="service-card fade-in">
+                    <i class="fas fa-cloud"></i>
+                    <h3>云服务部署</h3>
+                    <p>提供云服务器部署、维护和优化服务，确保系统稳定运行</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 案例展示 -->
+    <section id="cases">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>案例展示</h2>
+                <p>我们与众多企业合作，打造了一系列成功的数字化解决方案</p>
+            </div>
+            
+            <div class="cases-grid">
+                <div class="case-card fade-in">
+                    <div class="case-image">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="case-content">
+                        <h3>电商平台开发</h3>
+                        <p>为某知名零售企业开发的全渠道电商平台，支持多终端访问</p>
+                        <div class="case-tags">
+                            <span class="tag">网站建设</span>
+                            <span class="tag">APP开发</span>
+                            <span class="tag">小程序开发</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="case-card fade-in">
+                    <div class="case-image">
+                        <i class="fas fa-hospital"></i>
+                    </div>
+                    <div class="case-content">
+                        <h3>医院管理系统</h3>
+                        <p>为某三甲医院开发的智慧医疗管理系统，提升医院运营效率</p>
+                        <div class="case-tags">
+                            <span class="tag">管理系统</span>
+                            <span class="tag">定制开发</span>
+                            <span class="tag">云部署</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="case-card fade-in">
+                    <div class="case-image">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="case-content">
+                        <h3>在线教育平台</h3>
+                        <p>为某教育机构开发的在线学习平台，支持直播、录播等多种教学模式</p>
+                        <div class="case-tags">
+                            <span class="tag">网站建设</span>
+                            <span class="tag">APP开发</span>
+                            <span class="tag">系统开发</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 技术优势 -->
+    <section id="technologies">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>技术优势</h2>
+                <p>我们拥有一支专业的技术团队，掌握最新的技术栈和开发理念</p>
+            </div>
+            
+            <div class="tech-grid">
+                <div class="tech-item fade-in">
+                    <i class="fas fa-laptop-code"></i>
+                    <h3>前端开发</h3>
+                    <p>Vue.js、React、Angular 等主流前端框架</p>
+                </div>
+                <div class="tech-item fade-in">
+                    <i class="fas fa-server"></i>
+                    <h3>后端开发</h3>
+                    <p>Java、Python、Node.js 等后端技术栈</p>
+                </div>
+                <div class="tech-item fade-in">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>移动开发</h3>
+                    <p>Flutter、React Native、原生开发</p>
+                </div>
+                <div class="tech-item fade-in">
+                    <i class="fas fa-database"></i>
+                    <h3>数据库</h3>
+                    <p>MySQL、MongoDB、Redis 等数据库技术</p>
+                </div>
+                <div class="tech-item fade-in">
+                    <i class="fas fa-cloud"></i>
+                    <h3>云服务</h3>
+                    <p>AWS、阿里云、腾讯云等云平台部署</p>
+                </div>
+                <div class="tech-item fade-in">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>安全保障</h3>
+                    <p>多层次安全防护，确保系统数据安全</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 客户评价 -->
+    <section id="testimonials">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>客户评价</h2>
+                <p>听听我们的客户怎么说</p>
+            </div>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card fade-in">
+                    <div class="quote">"</div>
+                    <p>智云星空团队专业高效，为我们开发的管理系统极大地提高了工作效率，非常感谢他们的优质服务！</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">李</div>
+                        <div>
+                            <h4>李总</h4>
+                            <p class="author-company">某科技公司</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card fade-in">
+                    <div class="quote">"</div>
+                    <p>从需求分析到系统上线，智云星空始终保持高度的专业和负责，最终交付的产品超出了我们的预期。</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">王</div>
+                        <div>
+                            <h4>王经理</h4>
+                            <p class="author-company">某制造企业</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card fade-in">
+                    <div class="quote">"</div>
+                    <p>智云星空的技术团队非常专业，能够快速理解我们的需求，并提供创新的解决方案，是值得信赖的合作伙伴。</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">张</div>
+                        <div>
+                            <h4>张总监</h4>
+                            <p class="author-company">某金融机构</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 关于我们 -->
+    <section id="about">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>关于我们</h2>
+                <p>智云星空是一家专注于软件定制开发的科技公司，致力于为企业提供优质的数字化解决方案</p>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-text fade-in">
+                    <p>智云星空成立于2018年，是一家专业的软件定制开发公司，总部位于杭州。我们拥有一支经验丰富的技术团队，专注于为企业提供软件定制开发、APP开发、小程序开发、网站建设、管理系统开发等服务。</p>
+                    <p>我们始终坚持以客户为中心，以技术为驱动，不断创新和进步，致力于为客户提供最优质的产品和服务。截至目前，我们已为超过500家企业提供了数字化解决方案，涵盖金融、医疗、教育、制造、零售等多个行业。</p>
+                    <p>未来，我们将继续深耕软件开发领域，不断提升技术实力和服务水平，为更多企业的数字化转型保驾护航。</p>
+                </div>
+                <div class="about-stats fade-in">
+                    <div class="stat-item">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">成功案例</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">100+</div>
+                        <div class="stat-label">技术专家</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">85%</div>
+                        <div class="stat-label">客户留存率</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">5+</div>
+                        <div class="stat-label">行业经验</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 联系我们 -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>联系我们</h2>
+                <p>如果您有任何需求或疑问，欢迎随时联系我们</p>
+            </div>
+            
+            <form class="contact-form fade-in">
+                <div class="form-group">
+                    <label for="name">姓名</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">邮箱</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">电话</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="service">服务类型</label>
+                    <input type="text" id="service" name="service" placeholder="请选择您需要的服务类型">
+                </div>
+                <div class="form-group">
+                    <label for="message">留言</label>
+                    <textarea id="message" name="message" placeholder="请详细描述您的需求"></textarea>
+                </div>
+                <button type="submit" class="cta-button">提交咨询</button>
+            </form>
+        </div>
+    </section>
+    
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>智云星空</h3>
+                    <p>专业的软件定制开发服务商，为企业提供全方位的数字化解决方案</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-weixin"></i></a>
+                        <a href="#"><i class="fab fa-weibo"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>服务项目</h3>
+                    <ul>
+                        <li><a href="#">软件定制开发</a></li>
+                        <li><a href="#">APP开发</a></li>
+                        <li><a href="#">小程序开发</a></li>
+                        <li><a href="#">网站建设</a></li>
+                        <li><a href="#">管理系统开发</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>关于我们</h3>
+                    <ul>
+                        <li><a href="#">公司简介</a></li>
+                        <li><a href="#">团队介绍</a></li>
+                        <li><a href="#">成功案例</a></li>
+                        <li><a href="#">新闻动态</a></li>
+                        <li><a href="#">招贤纳士</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>联系我们</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> 杭州市拱墅区</li>
+                        <li><i class="fas fa-phone"></i> 18258037659</li>
+                        <li><i class="fas fa-envelope"></i> 292515301@qq.com</li>
+                        <li><i class="fas fa-clock"></i> 周一至周五 9:00-18:00</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 智云星空. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- 引入外部脚本 -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    
+    <!-- 自定义脚本 -->
+    <script>
+        // 页面加载完成后隐藏加载动画
+        window.addEventListener('load', function() {
+            const loader = document.getElementById('loader');
+            loader.classList.add('hidden');
+        });
+        
+        // 粒子背景初始化
+        particlesJS({
+            particles: {
+                number: {
+                    value: 80,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: {
+                    value: "#64FFDA"
+                },
+                shape: {
+                    type: "circle",
+                    stroke: {
+                        width: 0,
+                        color: "#000000"
+                    },
+                    polygon: {
+                        nb_sides: 5
+                    }
+                },
+                opacity: {
+                    value: 0.5,
+                    random: false,
+                    anim: {
+                        enable: false,
+                        speed: 1,
+                        opacity_min: 0.1,
+                        sync: false
+                    }
+                },
+                size: {
+                    value: 3,
+                    random: true,
+                    anim: {
+                        enable: false,
+                        speed: 40,
+                        size_min: 0.1,
+                        sync: false
+                    }
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#64FFDA",
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 6,
+                    direction: "none",
+                    random: false,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false,
+                    attract: {
+                        enable: false,
+                        rotateX: 600,
+                        rotateY: 1200
+                    }
+                }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: "repulse"
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: "push"
+                    },
+                    resize: true
+                },
+                modes: {
+                    grab: {
+                        distance: 400,
+                        line_linked: {
+                            opacity: 1
+                        }
+                    },
+                    bubble: {
+                        distance: 400,
+                        size: 40,
+                        duration: 2,
+                        opacity: 8,
+                        speed: 3
+                    },
+                    repulse: {
+                        distance: 200,
+                        duration: 0.4
+                    },
+                    push: {
+                        particles_nb: 4
+                    },
+                    remove: {
+                        particles_nb: 2
+                    }
+                }
+            },
+            retina_detect: true
+        });
+        
+        // 滚动动画
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        
+        // 观察所有需要动画的元素
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // 导航栏滚动效果
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.padding = '1rem 0';
+                header.style.background = 'rgba(10, 25, 47, 0.98)';
+            } else {
+                header.style.padding = '1.5rem 0';
+                header.style.background = 'rgba(10, 25, 47, 0.95)';
+            }
+        });
+        
+        // 轮播图功能
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        const indicators = document.querySelectorAll('.indicator');
+        const totalSlides = slides.length;
+        let slideInterval;
+        
+        // 自动播放轮播图
+        function startSlide() {
+            slideInterval = setInterval(nextSlide, 5000);
+        }
+        
+        // 停止自动播放
+        function stopSlide() {
+            clearInterval(slideInterval);
+        }
+        
+        // 切换到指定幻灯片
+        function goToSlide(slideIndex) {
+            // 移除当前活动状态
+            slides[currentSlide].classList.remove('active');
+            indicators[currentSlide].classList.remove('active');
+            
+            // 更新当前幻灯片索引
+            currentSlide = (slideIndex + totalSlides) % totalSlides;
+            
+            // 添加活动状态到新幻灯片
+            slides[currentSlide].classList.add('active');
+            indicators[currentSlide].classList.add('active');
+        }
+        
+        // 下一张幻灯片
+        function nextSlide() {
+            goToSlide(currentSlide + 1);
+        }
+        
+        // 上一张幻灯片
+        function prevSlide() {
+            goToSlide(currentSlide - 1);
+        }
+        
+        // 指示器点击事件
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                stopSlide();
+                goToSlide(index);
+                startSlide();
+            });
+        });
+        
+        // 控制按钮点击事件
+        const prevButton = document.querySelector('.carousel-control.prev');
+        const nextButton = document.querySelector('.carousel-control.next');
+        
+        prevButton.addEventListener('click', () => {
+            stopSlide();
+            prevSlide();
+            startSlide();
+        });
+        
+        nextButton.addEventListener('click', () => {
+            stopSlide();
+            nextSlide();
+            startSlide();
+        });
+        
+        // 鼠标悬停时停止自动播放
+        const carouselContainer = document.querySelector('.carousel-container');
+        carouselContainer.addEventListener('mouseenter', stopSlide);
+        carouselContainer.addEventListener('mouseleave', startSlide);
+        
+        // 初始化轮播图
+        startSlide();
+        
+        // 修复移动端100vh兼容性问题
+        function setViewportHeight() {
+            // 获取视口高度
+            const vh = window.innerHeight * 0.01;
+            // 设置CSS变量--vh
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        }
+        
+        // 初始化视口高度
+        setViewportHeight();
+        
+        // 监听窗口大小变化，重新计算视口高度
+        window.addEventListener('resize', setViewportHeight);
+        
+        // 监听设备旋转，重新计算视口高度
+        window.addEventListener('orientationchange', setViewportHeight);
+        
+        // 移动端菜单功能
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        menuToggle.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
